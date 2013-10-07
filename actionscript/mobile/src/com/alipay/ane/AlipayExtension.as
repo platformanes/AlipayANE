@@ -106,7 +106,8 @@ package com.alipay.ane
 			if(extContext)   
 			{
 				return extContext.call(ALIPAY_FUNCTION_PAY,subject,price,body,
-					PartnerID,SellerID,MD5_KEY,PartnerPrivKey,AlipayPubKey) as String;
+					PartnerID,SellerID,MD5_KEY,PartnerPrivKey,AlipayPubKey,
+					notify_url,service,return_url) as String;
 			}
 			return "AlipayPay function failed";
 		}
