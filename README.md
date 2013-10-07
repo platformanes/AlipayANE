@@ -6,6 +6,7 @@ AlipayANE
 * Alipay ANE for Android 安卓端ANE
 * Alipay ANE for IOS 苹果移动端ANE
 * IOS端url若要调用则需要修改-app.xml
+* IOS端支付宝库请自行下载
 * sample 对于android和IOS均适用 关于环境配置不在赘述
 
 ## 资源
