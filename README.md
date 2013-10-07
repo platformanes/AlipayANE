@@ -5,7 +5,8 @@ AlipayANE
 包含以下内容：
 * Alipay ANE for Android 安卓端ANE
 * Alipay ANE for IOS 苹果移动端ANE
-* IOS端稍后跟上
+* IOS端url若要调用则需要修改-app.xml
+* sample 对于android和IOS均适用 关于环境配置不在赘述
 
 ## 资源
 
