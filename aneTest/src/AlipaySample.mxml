@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   width="462" applicationComplete="handler_appComp(event)">
+	<fx:Script>
+		<![CDATA[
+			import com.alipay.ane.AlipayExtension;
+			
+			import mx.events.FlexEvent;
+			import mx.utils.ObjectUtil;
+			
+			private var isLang:Boolean = false;
+			private function handler_status($evt:StatusEvent):void
+			{
+				showInfo('------------------');
+				showInfo('level:'+ $evt.level , ',code:'+$evt.code);
+			}
+			
+			protected function handler_appComp($evt:FlexEvent):void 
+			{
+				AlipayExtension.getInstance().addEventListener(StatusEvent.STATUS,handler_status);
+			}
+			
+			protected function handler_getStorageBTNclick($evt:MouseEvent):void
+			{
+				clearInfo();
+				showInfo('====================');
+			}
+			
+			
+			protected function handler_getSystemInfoBTNclick($evt:MouseEvent):void
+			{
+				clearInfo();
+				
+			}
+			
+			protected function handler_getPackageInfoBTNclick($evt:MouseEvent):void
+			{
+				
+			}
+			
+			
+			private function showInfo(...$args):void
+			{
+				var __info:String = '';
+				for (var i:int = 0; i < $args.length; i++) 
+				{
+					__info += $args[i] + File.lineEnding;
+				}
+				infoTA.appendText(__info);
+			}
+			
+			
+			
+			private function clearInfo():void
+			{
+				infoTA.text = '';
+			}
+			
+			
+			protected function sdk_handle(event:MouseEvent):void
+			{
+				var b:Button = event.currentTarget as Button;
+				switch(b.id)
+				{
+					
+					case "inits":
+						AlipayExtension.getInstance().AlipayInit(
+							"2088901007825435",
+							
+							"2088901007825435",
+							
+							" ",
+							
+							"MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAMCsovVkgspYJeFDoutLarl/uN7zEQ88G" +
+							"APOYrWavqzarD2V02x4gYEdLyyVtIptaHje7OocIBfkIMzXbIPmTrihUEDSL+oBcAFUXg03qdOpG8/W7n9O" +
+							"y6TswRd6/c9GbiZd9uwBSoT4mlAfvc1sPFjRG7hvAR9/W87tpLBShAufAgMBAAECgYEAvZZh90MCq2ZXR7" +
+							"RNEGgySPtThxX3+FyyaLRhTr9I1j+J8kOGOZrOG6UC8UUR1JBZl24MA0TPk5Knb8id/5/UXoFFMluXRSy+j" +
+							"fbrS435djBpalrdT4/v4LVdbjlLOmcNcGVgqdhm/ymzim2uZM26VulaAeSwLQ/JDGvd3JmxLXECQQD+dB2W+y" +
+							"CgTLFU9xr3Px2hf9qn1Ds4lbgeFCh0cc+0dG219+UflA6QLFjkKDE727E0S1onisSnz5eTQr7FhmF3AkEAwdhn" +
+							"TVmBEdKTdVwJEaUJ30snTzg0Vm2gaF+YiGeo+NhnsGdrbKLhmv1xBGSiAx4NDctnsltNPNcrRvwtE1lxGQJBAN" +
+							"0rCF0nQqCSiMCVWDb4AUVS4DdoXWE9oZ9jXhZ4plTvrjywj9L22gGuykTmOoUQ2+HcbSxZjb1ezx0Mssz1lNk" +
+							"CQAzXv5BaW7jIkMh3vooSuyK2IfaXrLAFN1ly6/Itm/5QqB4B3BYofHX+UJyP5kP6m7bMQSSJ9AYR42YikwHz" +
+							"LRECQQChv8yUG4qnEkYRNMDx/NpJEqi2Axsec2hofErio4on5z3FtcFW9xVJcYvNv1W6k62d1mM/qikDv7cbDUrU5tqm",
+							
+							"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCY4kin/Pk89ya/37y9rU5U2LH+HoMGCbncMvTOACPcVkQxq9z" +
+							"CkewRTupW3/rhwOOERTwymVza0x99IciSi00WUr7cvOx8YZOKQObB1JYeWDCvhUsNWhjLbylvZxE3kjQesM7ORL" +
+							"fQTQK1uSMUptZzYt5uKLChN7Qrw+qaM0gC7wIDAQAB",
+							
+							"http://notify.java.jpxx.org/index.jsp",
+							
+							"mobile.securitypay.pay",
+							
+							"http://m.alipay.com");
+						break;
+					
+					
+					case "pay":
+						AlipayExtension.getInstance().AlipayPay("IPHONE5S",1,"土豪金，当今最流行");
+						break;      
+					
+					case "exits":
+						AlipayExtension.getInstance().AlipayExit();
+						exit();  
+						break; 
+				}
+			}
+			
+			
+			
+			private function exit():void
+			{
+				NativeApplication.nativeApplication.exit();      
+			}
+			
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<s:states>
+		<s:State name="fun1State"/>
+	</s:states>
+	<s:HGroup width="100%" horizontalAlign="center">
+		<s:Label id="alipay" width="406" height="41" color="#6A13ED" fontFamily="Arial" fontWeight="bold"
+				 text="Alipay ANE(by Rect)" textAlign="center" verticalAlign="middle"/>
+	</s:HGroup>
+	
+	<s:TileGroup includeIn="fun1State" width="753" height="212">
+		<s:Button id="inits" y="12" width="541" height="27" label="初始化" click="sdk_handle(event)"
+				  fontFamily="_serif" fontSize="24" fontStyle="normal" fontWeight="bold"/>
+		<s:Button id="pay" label="定额支付" click="sdk_handle(event)"/>
+		<s:Button id="exits" width="456" label="退 出" click="sdk_handle(event)"/>
+		
+	</s:TileGroup>	
+	
+	<s:VGroup width="100%" height="573" horizontalAlign="right">
+		<s:HGroup>
+		</s:HGroup>
+		<s:TextArea id="infoTA" width="100%" height="624" color="#030715" textAlign="left"/>
+	</s:VGroup>
+</s:Application>
