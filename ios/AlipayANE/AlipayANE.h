@@ -84,13 +84,14 @@ ANE_FUNCTION(AlipayExit);
 ANE_FUNCTION(AlipayInit);
 //支付宝支付
 ANE_FUNCTION(AlipayPay);
-
+//充值返回验证
+ANE_FUNCTION(AlipayUrl);
 
 //将FREObject转成NSString
 NSString * getStringFromFREObject(FREObject obj);
 int getIntFromFreObject(FREObject freObject);
 
-NSString *Ali_PartnerID;
+NSString * Ali_PartnerID;
 NSString * Ali_SellerID;
 NSString * Ali_MD5_KEY;
 NSString * Ali_PartnerPrivKey;

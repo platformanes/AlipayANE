@@ -85,7 +85,8 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
     {
         MAP_FUNCTION(AlipayExit, NULL),
         MAP_FUNCTION(AlipayInit, NULL),
-        MAP_FUNCTION(AlipayPay, NULL)
+        MAP_FUNCTION(AlipayPay, NULL),
+        MAP_FUNCTION(AlipayUrl, NULL)
     };
     
     *numFunctionsToTest = sizeof(func) / sizeof(FRENamedFunction);
@@ -129,6 +130,7 @@ ANE_FUNCTION(AlipayExit)
     {
         NSLog(@"Result = %d", aResult);
     }
+    
     
     [[AlipayDel alloc] sendMegToAs:context code:@"AlipayExit" level:@"alipay exit ending"];
     
@@ -210,11 +212,34 @@ ANE_FUNCTION(AlipayPay)
     return fo;
 }
 
+ANE_FUNCTION(AlipayUrl)
+{
+    NSLog(@"Entering AlipayUrl()");
+    
+    FREObject fo = NULL;
+    context = ctx;
+    
+    
+    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayUrl" level:@"alipay AlipayUrl begin"];
+    
+    NSString * urlStr = getStringFromFREObject(argv[0]);
+    NSString * _allpayPubKey = getStringFromFREObject(argv[1]);
+    
+    NSURL * _alipayURL = [NSURL URLWithString:urlStr];
+    
+    [[AlipayDel alloc] parse:_alipayURL _allpayPubKey:_allpayPubKey _context:context];
+    
+    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayUrl" level:@"alipay AlipayUrl ending"];
+    NSLog(@"ending AlipaySignCheck()");
+    return fo;
+}
+
 int getIntFromFreObject(FREObject freObject)
 {
     int32_t value;
     FREGetObjectAsInt32(freObject, &value);
     return value;
+    
 }
 
 /*

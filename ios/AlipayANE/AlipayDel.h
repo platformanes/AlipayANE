@@ -15,7 +15,19 @@
 #import "AlixPayOrder.h"
 #import "AlixLibService.h"
 
-@interface AlipayDel : NSObject
+@interface AlipayDel : NSObject{
+    NSString * Ali_PartnerID;
+    NSString * Ali_SellerID;
+    NSString * Ali_MD5_KEY;
+    NSString * Ali_PartnerPrivKey;
+    NSString * Ali_AlipayPubKey;
+    
+    
+    SEL _result;
+    
+    
+    FREContext context;
+}
 -(id) initWithFreContext:(FREContext) freContext;
 -(void)paymentResult:(NSString *)result;
 -(void) sendMegToAs:(FREContext)_context
@@ -34,11 +46,10 @@
                     _service:(NSString *)_service
                  _return_url:(NSString *)_return_url;
 
--(void) initPayKey:(NSString *)_partnerID
-     _sellerID:(NSString *)_sellerID
-      _MD5_KEY:(NSString *)_MD5_KEY
-_partnerPrivKey:(NSString *)_partenerPrivKey
- _allpayPubKey:(NSString *)_allpayPubKey;
+
+- (void)parse:(NSURL *)url
+_allpayPubKey:(NSString *)_allpayPubKey
+     _context:(FREContext)_context;
 @end
 
 @interface Product : NSObject{
@@ -62,15 +73,5 @@ NSMutableArray *_products;
 
 @end
 
-NSString * Ali_PartnerID;
-NSString * Ali_SellerID;
-NSString * Ali_MD5_KEY;
-NSString * Ali_PartnerPrivKey;
-NSString * Ali_AlipayPubKey;
 
-
-SEL _result;
-
-
-FREContext context;
 

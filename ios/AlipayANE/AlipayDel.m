@@ -18,7 +18,6 @@
 
 -(void)dealloc
 {
-    context = nil;
 #if ! __has_feature(objc_arc)
     [_products release];
     [super dealloc];
@@ -29,6 +28,18 @@
 
 @implementation AlipayDel
 
+-(void)dealloc
+{
+#if ! __has_feature(objc_arc)
+    [Ali_PartnerID release];
+    [Ali_SellerID release];
+    [Ali_MD5_KEY release];
+    [Ali_PartnerPrivKey release];
+    [Ali_AlipayPubKey release];
+    
+    [super dealloc];
+#endif
+}
 
 
 //wap回调函数
@@ -50,6 +61,7 @@
 			 */
             
             //交易成功
+            
             if (Ali_AlipayPubKey == NULL) {
                 [self sendMegToAs:context code:@"AlipayPay" level:@"签名错误"];
                 return;
@@ -85,64 +97,6 @@
  */
 - (void)generateData
 {
-//	NSArray *subjects = [[NSArray alloc] initWithObjects:@"话费充值",
-//						 @"魅力香水",@"珍珠项链",@"三星 原装移动硬盘",
-//						 @"发箍发带",@"台版N97I",@"苹果手机",
-//						 @"蝴蝶结",@"韩版雪纺",@"五皇纸箱",nil];
-//	NSArray *body = [[NSArray alloc] initWithObjects:@"[四钻信誉]北京移动30元 电脑全自动充值 1到10分钟内到账",
-//					 @"新年特惠 adidas 阿迪达斯走珠 香体止汗走珠 多种香型可选",
-//					 @"[2元包邮]韩版 韩国 流行饰品太阳花小巧雏菊 珍珠项链2M15",
-//					 @"三星 原装移动硬盘 S2 320G 带加密 三星S2 韩国原装 全国联保",
-//					 @"[肉来来]超热卖 百变小领巾 兔耳朵布艺发箍发带",
-//					 @"台版N97I 有迷你版 双卡双待手机 挂QQ JAVA 炒股 来电归属地 同款比价",
-//					 @"山寨国产红苹果手机 Hiphone I9 JAVA QQ后台 飞信 炒股 UC",
-//					 @"[饰品实物拍摄]满30包邮 三层绸缎粉色 蝴蝶结公主发箍多色入",
-//					 @"饰品批发价 韩版雪纺纱圆点布花朵 山茶玫瑰花 发圈胸针两用 6002",
-//					 @"加固纸箱 会员包快递拍好去运费冲纸箱首个五皇",nil];
-//	
-//	
-//    
-//	for (int i = 0; i < [subjects count]; ++i) {
-//		Product *product = [[Product alloc] init];
-//		product.subject = [subjects objectAtIndex:i];
-//		product.body = [body objectAtIndex:i];
-//		if (1==i) {
-//			product.price = 1;
-//		}
-//		else if(2==i)
-//		{
-//			product.price = 10;
-//		}
-//		else if(3==i)
-//		{
-//			product.price = 100;
-//		}
-//		else if(4==i)
-//		{
-//			product.price = 1000;
-//		}
-//		else if(5==i)
-//		{
-//			product.price = 2000;
-//		}
-//		else if(6==i)
-//		{
-//			product.price = 6000;
-//		}
-//		else {
-//			product.price = 0.01;
-//		}
-//		
-//		
-//#if ! __has_feature(objc_arc)
-//		[product release];
-//#endif
-//	}
-//	
-//#if ! __has_feature(objc_arc)
-//	[subjects release], subjects = nil;
-//	[body release], body = nil;
-//#endif
 }
 
 
@@ -175,6 +129,7 @@
     context = _context;
     
     Ali_PartnerID = _partnerID;
+//    [Ali_PartnerID retain];
     
     Ali_SellerID = _sellerID;
     
@@ -288,14 +243,7 @@
     return self;
 }
 
--(void) initPayKey:(NSString *)_partnerID
-         _sellerID:(NSString *)_sellerID
-          _MD5_KEY:(NSString *)_MD5_KEY
-   _partnerPrivKey:(NSString *)_partenerPrivKey
-     _allpayPubKey:(NSString *)_allpayPubKey
-{
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayInit" level:@"begin"];
-}
+
 
 -(void)sendMegToAs:(FREContext) _context code:(NSString *  )code level:(NSString * )level {
     
@@ -306,5 +254,70 @@
                                 (const uint8_t *)[level UTF8String]);
 }
 
+
+- (void)parse:(NSURL *)url _allpayPubKey:(NSString *)_allpayPubKey _context:(FREContext)_context {
+    
+    [[AlipayDel alloc] sendMegToAs:_context code:@"AlipayUrl" level:@"parse begin"];
+    //结果处理
+    AlixPayResult* result = [self handleOpenURL:url];
+    
+	if (result)
+    {
+		
+		if (result.statusCode == 9000)
+        {
+			/*
+			 *用公钥验证签名 严格验证请使用result.resultString与result.signString验签
+			 */
+            
+            //交易成功
+            NSString* key = _allpayPubKey;
+			id<DataVerifier> verifier;
+            verifier = CreateRSADataVerifier(key);
+            
+			if ([verifier verifyString:result.resultString withSign:result.signString])
+            {
+                //验证签名成功，交易结果无篡改
+                [[AlipayDel alloc] sendMegToAs:_context code:@"AlipayUrl" level:@"验证签名成功，交易结果无篡改"];
+			}
+            else
+            {
+                [[AlipayDel alloc] sendMegToAs:_context code:@"AlipayUrl" level:@"签名验证错误，交易失败"];
+            }
+        }
+        else
+        {
+            //交易失败
+            [[AlipayDel alloc] sendMegToAs:_context code:@"AlipayUrl" level:@"交易失败"];
+        }
+    }
+    else
+    {
+        //失败
+        [[AlipayDel alloc] sendMegToAs:_context code:@"AlipayUrl" level:@"失败"];
+    }
+    
+}
+
+- (AlixPayResult *)resultFromURL:(NSURL *)url {
+	NSString * query = [[url query] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+#if ! __has_feature(objc_arc)
+    return [[[AlixPayResult alloc] initWithString:query] autorelease];
+#else
+	return [[AlixPayResult alloc] initWithString:query];
+#endif
+}
+
+- (AlixPayResult *)handleOpenURL:(NSURL *)url {
+	AlixPayResult * result = nil;
+	
+	if (url != nil && [[url host] compare:@"safepay"] == 0) {
+		result = [self resultFromURL:url];
+	}
+    
+	return result;
+}
+
 @end
+
 

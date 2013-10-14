@@ -19,8 +19,18 @@
 			protected function handler_appComp($evt:FlexEvent):void 
 			{
 				AlipayExtension.getInstance().addEventListener(StatusEvent.STATUS,handler_status);
+				
+				NativeApplication.nativeApplication.addEventListener(InvokeEvent.INVOKE,onURLHandle);
 			}
 			
+			protected function onURLHandle(e:InvokeEvent):void
+			{
+				if(e.arguments.length>0){
+					trace(e.arguments[0]);
+					var str:String = e.arguments[0] as String;
+					AlipayExtension.getInstance().AlipayURLHandle_JustIOS(str);
+				}
+			}
 			protected function handler_getStorageBTNclick($evt:MouseEvent):void
 			{
 				clearInfo();
@@ -118,25 +128,25 @@
 	<s:layout>
 		<s:VerticalLayout/>
 	</s:layout>
-	<s:states>
-		<s:State name="fun1State"/>
-	</s:states>
+	
 	<s:HGroup width="100%" horizontalAlign="center">
 		<s:Label id="alipay" width="406" height="41" color="#6A13ED" fontFamily="Arial" fontWeight="bold"
 				 text="Alipay ANE(by Rect)" textAlign="center" verticalAlign="middle"/>
 	</s:HGroup>
 	
-	<s:TileGroup includeIn="fun1State" width="753" height="212">
-		<s:Button id="inits" y="12" width="541" height="27" label="初始化" click="sdk_handle(event)"
+	<s:TileGroup  width="753" height="212">
+		<s:Button id="inits" y="12" width="541" height="50" label="初始化" click="sdk_handle(event)"
 				  fontFamily="_serif" fontSize="24" fontStyle="normal" fontWeight="bold"/>
-		<s:Button id="pay" label="定额支付" click="sdk_handle(event)"/>
-		<s:Button id="exits" width="456" label="退 出" click="sdk_handle(event)"/>
+		<s:Button id="pay" label="定额支付" click="sdk_handle(event)"
+				  fontFamily="_serif" fontSize="24" fontStyle="normal" fontWeight="bold"/>
+		<s:Button id="exits" width="456" label="退 出" click="sdk_handle(event)"
+				  fontFamily="_serif" fontSize="24" fontStyle="normal" fontWeight="bold"/>
 		
 	</s:TileGroup>	
 	
 	<s:VGroup width="100%" height="573" horizontalAlign="right">
 		<s:HGroup>
 		</s:HGroup>
-		<s:TextArea id="infoTA" width="100%" height="624" color="#030715" textAlign="left"/>
+		<s:TextArea id="infoTA" width="100%" height="624" color="#030715" textAlign="left" fontSize="24"/>
 	</s:VGroup>
 </s:Application>

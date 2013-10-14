@@ -34,6 +34,7 @@ package com.alipay.ane
 		 */		
 		private static const ALIPAY_FUNCTION_EXIT:String = "AlipayExit";
 		
+		private static const ALIPAY_FUNCTION_URL:String = "AlipayUrl";
 		public static const EXTENSION_ID:String = "com.alipay.ane.AlipayANE";//与extension.xml中的id标签一致
 		private var extContext:ExtensionContext;
 		private static var _instance:AlipayExtension; 
@@ -111,6 +112,21 @@ package com.alipay.ane
 			}
 			return "AlipayPay function failed";
 		}
+		/**
+		 * IOS URL回调 
+		 * @param url
+		 * @return 
+		 * 
+		 */		
+		public function AlipayURLHandle_JustIOS(url:String):String
+		{
+			if(extContext)   
+			{   
+				return extContext.call(ALIPAY_FUNCTION_URL,url,AlipayPubKey) as String;
+			}
+			return "AlipayURLHandle function failed";
+		}
+		
 		/**
 		 * 清理一些东西 
 		 * @param key
