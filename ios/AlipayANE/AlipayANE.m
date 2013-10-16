@@ -131,8 +131,9 @@ ANE_FUNCTION(AlipayExit)
         NSLog(@"Result = %d", aResult);
     }
     
+    AlipayDel * alipaydel = [AlipayDel new];
+    [alipaydel sendMegToAs:context code:@"AlipayExit" level:@"alipay exit ending"];
     
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayExit" level:@"alipay exit ending"];
     
 	NSLog(@"Exiting AlipayExit()");
 	return fo;
@@ -144,11 +145,12 @@ ANE_FUNCTION(AlipayInit)
     
     FREObject fo = NULL;
     context = ctx;
+    AlipayDel * alipaydel = [AlipayDel new];
     
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayInit" level:@"alipay init begin"];
+    [alipaydel sendMegToAs:context code:@"AlipayInit" level:@"alipay init begin"];
     
     
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayInit" level:@"alipay init ending"];
+    [alipaydel sendMegToAs:context code:@"AlipayInit" level:@"alipay init ending"];
     
     NSLog(@"ending AlipayInit()");
     return fo;
@@ -162,20 +164,21 @@ ANE_FUNCTION(AlipayPay)
     
     FREObject fo = NULL;
     context = ctx;
+    AlipayDel * alipaydel = [AlipayDel new];
     
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayPay" level:@"alipay pay begin"];
+    [alipaydel sendMegToAs:context code:@"AlipayPay" level:@"alipay pay begin"];
     
     Ali_subject = getStringFromFREObject(argv[0]);
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayPay" level:Ali_subject];
+    [alipaydel sendMegToAs:context code:@"AlipayPay" level:Ali_subject];
     
     Ali_price = getIntFromFreObject(argv[1]);
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayPay" level:@"price "];
+    [alipaydel sendMegToAs:context code:@"AlipayPay" level:@"price "];
     
     Ali_body = getStringFromFREObject(argv[2]);
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayPay" level:Ali_body];
+    [alipaydel sendMegToAs:context code:@"AlipayPay" level:Ali_body];
     
-    [[AlipayDel alloc] initWithFreContext:context];
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayPay" level:@"initWithFre is OK"];
+    [alipaydel initWithFreContext:context];
+    [alipaydel sendMegToAs:context code:@"AlipayPay" level:@"initWithFre is OK"];
     
     Ali_PartnerID = getStringFromFREObject(argv[3]);
     
@@ -194,7 +197,7 @@ ANE_FUNCTION(AlipayPay)
     Ali_return_url = getStringFromFREObject(argv[10]);
     
     
-    [[AlipayDel alloc] createOrderandSinged:Ali_subject
+    [alipaydel createOrderandSinged:Ali_subject
                                       price:Ali_price
                                        body:Ali_body
                                    _context:context
@@ -207,7 +210,7 @@ ANE_FUNCTION(AlipayPay)
                                    _service:Ali_service
                                 _return_url:Ali_return_url];
     
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayPay" level:@"alipay pay ending"];
+    [alipaydel sendMegToAs:context code:@"AlipayPay" level:@"alipay pay ending"];
     NSLog(@"ending AlipayPay()");
     return fo;
 }
@@ -218,18 +221,18 @@ ANE_FUNCTION(AlipayUrl)
     
     FREObject fo = NULL;
     context = ctx;
+    AlipayDel * alipaydel = [AlipayDel new];
     
-    
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayUrl" level:@"alipay AlipayUrl begin"];
+    [alipaydel sendMegToAs:context code:@"AlipayUrl" level:@"alipay AlipayUrl begin"];
     
     NSString * urlStr = getStringFromFREObject(argv[0]);
     NSString * _allpayPubKey = getStringFromFREObject(argv[1]);
     
     NSURL * _alipayURL = [NSURL URLWithString:urlStr];
     
-    [[AlipayDel alloc] parse:_alipayURL _allpayPubKey:_allpayPubKey _context:context];
+    [alipaydel parse:_alipayURL _allpayPubKey:_allpayPubKey _context:context];
     
-    [[AlipayDel alloc] sendMegToAs:context code:@"AlipayUrl" level:@"alipay AlipayUrl ending"];
+    [alipaydel sendMegToAs:context code:@"AlipayUrl" level:@"alipay AlipayUrl ending"];
     NSLog(@"ending AlipaySignCheck()");
     return fo;
 }
