@@ -14,7 +14,7 @@
 * 官方SDK[Alipay](http://club.alipay.com/read-htm-tid-9976972.html) 
 
 ## 编译方法
-* 查看Bulid文件夹下的Bulid ANE文件夹
+* 查看Bulid文件夹下的Bulid ANE文件夹(ane.bat for win,ane.sh for mac)
 * 查看Bulid文件夹下的Bulid APK文件夹
 
 ## 作者
