@@ -10,7 +10,7 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="com/alipay/ane/AlipayExtension" mod="1381713450250" signatureChecksum="919126928" >
+      <script name="com/alipay/ane/AlipayExtension" mod="1382291712000" signatureChecksum="919126928" >
         <def id="com.alipay.ane:AlipayExtension" /> 
         <dep id="flash.events:StatusEvent" type="e" /> 
         <dep id="flash.external:ExtensionContext" type="e" /> 
@@ -20,19 +20,19 @@
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
       </script>
-      <script name="_e91bd47ed1b1f9ef029cbaba5266f44e6a1dd4b04bca767f03d1e06b0e0f7512_flash_display_Sprite" mod="1381713546953" signatureChecksum="3759635519" >
+      <script name="_e91bd47ed1b1f9ef029cbaba5266f44e6a1dd4b04bca767f03d1e06b0e0f7512_flash_display_Sprite" mod="1382291716525" signatureChecksum="3759635519" >
         <def id="_e91bd47ed1b1f9ef029cbaba5266f44e6a1dd4b04bca767f03d1e06b0e0f7512_flash_display_Sprite" /> 
         <dep id="flash.system:Security" type="e" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.display:Sprite" type="i" /> 
       </script>
-      <script name="com/alipay/ane/AlipayEvents" mod="1381713450250" signatureChecksum="3548927273" >
+      <script name="com/alipay/ane/AlipayEvents" mod="1381684310000" signatureChecksum="3548927273" >
         <def id="com.alipay.ane:AlipayEvents" /> 
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="c07fe79560949f4d1a0d2f6c43fe8e085c6c4aafdc415d2e5bbc3cbf7ec82bfb"   />
+        <digest type="SHA-256" signed="false" value="7249ef16cd17f690682a59aa05b0bb62742ea8625be15513150a9f685685c8bd"   />
       </digests>
     </library>
   </libraries>

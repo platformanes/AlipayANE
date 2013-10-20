@@ -91,19 +91,6 @@ ANE_FUNCTION(AlipayUrl);
 NSString * getStringFromFREObject(FREObject obj);
 int getIntFromFreObject(FREObject freObject);
 
-NSString * Ali_PartnerID;
-NSString * Ali_SellerID;
-NSString * Ali_MD5_KEY;
-NSString * Ali_PartnerPrivKey;
-NSString * Ali_AlipayPubKey;
-
-NSString * Ali_notify_url;
-NSString * Ali_service;
-NSString * Ali_return_url;
-
-NSString * Ali_subject;
-NSString * Ali_body;
-float Ali_price;
 
 FREContext context;
 

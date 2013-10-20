@@ -12,14 +12,7 @@ package com.alipay.ane
 	 */
 	public class AlipayExtension extends EventDispatcher 
 	{ 
-		private static var PartnerID:String;
-		private static var SellerID:String;
-		private static var MD5_KEY:String;
-		private static var PartnerPrivKey:String;
-		private static var AlipayPubKey:String
-		private static var notify_url:String = "";
-		private static var service:String = "";
-		private static var return_url:String = "";
+		
 		/**
 		 * Ailpay Init 
 		 */		
@@ -72,25 +65,16 @@ package com.alipay.ane
 		{
 			if(extContext)
 			{
-				PartnerID = _PartnerID;
-				SellerID = _SellerID;
-				MD5_KEY = _MD5_KEY;
-				PartnerPrivKey = _PartnerPrivKey;
-				AlipayPubKey = _AlipayPubKey;
-				
-				notify_url = _notify_url;
-				service = _service;
-				return_url = _return_url;
 				
 				return extContext.call(ALIPAY_FUNCTION_INIT,
-					PartnerID,
-					SellerID,
-					MD5_KEY,
-					PartnerPrivKey,
-					AlipayPubKey,
-					notify_url,
-					service,
-					return_url) as String;
+					_PartnerID,
+					_SellerID,
+					_MD5_KEY,
+					_PartnerPrivKey,
+					_AlipayPubKey,
+					_notify_url,
+					_service,
+					_return_url) as String;
 			}
 			return "AlipayInit function failed";
 		}
@@ -106,9 +90,7 @@ package com.alipay.ane
 		{
 			if(extContext)   
 			{
-				return extContext.call(ALIPAY_FUNCTION_PAY,subject,price,body,
-					PartnerID,SellerID,MD5_KEY,PartnerPrivKey,AlipayPubKey,
-					notify_url,service,return_url) as String;
+				return extContext.call(ALIPAY_FUNCTION_PAY,subject,price,body) as String;
 			}
 			return "AlipayPay function failed";
 		}
@@ -122,7 +104,7 @@ package com.alipay.ane
 		{
 			if(extContext)   
 			{   
-				return extContext.call(ALIPAY_FUNCTION_URL,url,AlipayPubKey) as String;
+				return extContext.call(ALIPAY_FUNCTION_URL,url) as String;
 			}
 			return "AlipayURLHandle function failed";
 		}

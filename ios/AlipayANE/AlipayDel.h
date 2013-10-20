@@ -16,12 +16,6 @@
 #import "AlixLibService.h"
 
 @interface AlipayDel : NSObject{
-    NSString * Ali_PartnerID;
-    NSString * Ali_SellerID;
-    NSString * Ali_MD5_KEY;
-    NSString * Ali_PartnerPrivKey;
-    NSString * Ali_AlipayPubKey;
-    
     
     SEL _result;
     
@@ -33,22 +27,24 @@
 -(void) sendMegToAs:(FREContext)_context
            code:(NSString *) code
           level:(NSString * )level;
+
+-(void) initAlipay:(FREContext) _context
+        _partnerID:(NSString *)_partnerID
+         _sellerID:(NSString *)_sellerID
+          _MD5_KEY:(NSString *)_MD5_KEY
+   _partnerPrivKey:(NSString *)_partenerPrivKey
+     _allpayPubKey:(NSString *)_allpayPubKey
+       _notify_url:(NSString *)_notify_url
+          _service:(NSString *)_service
+       _return_url:(NSString *)_return_url;
+
 -(void) createOrderandSinged:(NSString *)subject
                        price:(float)price
                         body:(NSString *)body
-                     _context:(FREContext)_context
-                  _partnerID:(NSString *)_partnerID
-                   _sellerID:(NSString *)_sellerID
-                    _MD5_KEY:(NSString *)_MD5_KEY
-             _partnerPrivKey:(NSString *)_partenerPrivKey
-               _allpayPubKey:(NSString *)_allpayPubKey
-                 _notify_url:(NSString *)_notify_url
-                    _service:(NSString *)_service
-                 _return_url:(NSString *)_return_url;
+                     _context:(FREContext)_context;
 
 
 - (void)parse:(NSURL *)url
-_allpayPubKey:(NSString *)_allpayPubKey
      _context:(FREContext)_context;
 @end
 
@@ -72,6 +68,15 @@ NSMutableArray *_products;
 
 
 @end
+
+NSString * Ali_PartnerID;
+NSString * Ali_SellerID;
+NSString * Ali_MD5_KEY;
+NSString * Ali_PartnerPrivKey;
+NSString * Ali_AlipayPubKey;
+NSString * Ali_notify_url;
+NSString * Ali_service;
+NSString * Ali_return_url;
 
 
 
