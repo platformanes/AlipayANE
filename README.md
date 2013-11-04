@@ -1,7 +1,7 @@
 ﻿AlipayANE
 =========
 
-## 支付宝ANE  for IOS for android
+## 支付宝ANE  for IOS for android(SDK版本 1.0.1)
 包含以下内容：
 * Alipay ANE for Android 安卓端ANE
 * Alipay ANE for IOS 苹果移动端ANE
