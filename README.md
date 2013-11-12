@@ -16,6 +16,7 @@
 ## 编译方法
 * 查看Bulid文件夹下的Bulid ANE文件夹(ane.bat for win,ane.sh for mac)
 * 查看Bulid文件夹下的Bulid APK文件夹
+* 温馨提示：Alipay.bundle资源需要放到AIR根目录，否则会发生资源取不到的问题
 
 ## 作者
 
