@@ -180,7 +180,7 @@ ANE_FUNCTION(AlipayPay)
     
     
     [alipaydel createOrderandSinged:getStringFromFREObject(argv[0])
-                                      price:getIntFromFreObject(argv[1])
+                                      price:getDoubleFromFreObject(argv[1])
                                        body:getStringFromFREObject(argv[2])
                                    _context:context];
     
@@ -229,7 +229,12 @@ NSString * getStringFromFREObject(FREObject obj)
     return [NSString stringWithUTF8String:(const char *)value];
 }
 
-
+double getDoubleFromFreObject(FREObject freObject)
+{
+    double value;
+    FREGetObjectAsDouble(freObject, &value);
+    return value;
+}
 
 
 

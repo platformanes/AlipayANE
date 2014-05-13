@@ -90,7 +90,7 @@ ANE_FUNCTION(AlipayUrl);
 //将FREObject转成NSString
 NSString * getStringFromFREObject(FREObject obj);
 int getIntFromFreObject(FREObject freObject);
-
+double getDoubleFromFreObject(FREObject freObject);
 
 FREContext context;
 

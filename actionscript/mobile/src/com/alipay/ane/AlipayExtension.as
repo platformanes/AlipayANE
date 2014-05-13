@@ -86,7 +86,7 @@ package com.alipay.ane
 		 * @return 
 		 * 
 		 */		
-		public function AlipayPay(subject:String,price:int,body:String):String
+		public function AlipayPay(subject:String,price:Number,body:String):String
 		{
 			if(extContext)   
 			{
