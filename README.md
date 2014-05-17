@@ -23,7 +23,7 @@
 iOS支付回调使用Url的方式  详细配置查看`aneTest`文件夹下的`-app.xml`文件 [IPHONE](https://github.com/platformanes/AlipayANE/blob/master/aneTest/src/AlipaySample-app.xml)标签处
 `294`-`316`行.
 
-<pre>
+```
  <iPhone>
         <InfoAdditions><![CDATA[
 			<key>UIDeviceFamily</key>
@@ -47,7 +47,7 @@ iOS支付回调使用Url的方式  详细配置查看`aneTest`文件夹下的`-a
 		]]></InfoAdditions>
         <requestedDisplayResolution>high</requestedDisplayResolution>
     </iPhone>
-</pre>
+```
 
 ## 作者
 
