@@ -18,6 +18,37 @@
 * 查看Bulid文件夹下的Bulid APK文件夹
 * 温馨提示：Alipay.bundle资源需要放到AIR根目录，否则会发生资源取不到的问题
 
+##　iOS版本特别提醒
+
+iOS支付回调使用Url的方式  详细配置查看`aneTest`文件夹下的`-app.xml`文件 [IPHONE](https://github.com/platformanes/AlipayANE/blob/master/aneTest/src/AlipaySample-app.xml)标签处
+`294`-`316`行.
+
+<pre>
+ <iPhone>
+        <InfoAdditions><![CDATA[
+			<key>UIDeviceFamily</key>
+			<array>
+				<string>1</string>
+				<string>2</string>
+			</array>
+			
+			<key>CFBundleURLTypes</key> 
+			<array> 
+	    	<dict> 
+	        	 <key>CFBundleURLSchemes</key> 
+    	    	<array> 
+        		    <string>AlipayANE</string> 
+    	    	</array> 
+    	    	<key>CFBundleURLName</key> 
+    	    	<string>com.rect.app</string> 
+    		</dict> 
+		</array>
+
+		]]></InfoAdditions>
+        <requestedDisplayResolution>high</requestedDisplayResolution>
+    </iPhone>
+</pre>
+
 ## 作者
 
 * [platformANEs](https://github.com/platformanes)由 [zrong](http://zengrong.net) 和 [rect](http://www.shadowkong.com/) 共同发起并完成。
